@@ -14,10 +14,7 @@ class SalesOrderUpi(models.Model):
         if self.company_id.country_code == 'IN':
             payment_url = 'upi://pay?pa=%s&pn=%s&am=%s&tr=%s&tn=%s' % (
                 self.company_id.l10n_in_upi_id,
-                self.company_id.name,
-                self.tax_totals,
-                self.payment_reference or self.name,
-                ("Payment for %s" % self.name))
+                self.company_id.name,)
             barcode = self.env['ir.actions.report'].barcode(barcode_type="QR", value=payment_url, width=120, height=120)
             return image_data_uri(base64.b64encode(barcode))
         return super()._generate_qr_code(silent_errors)
