@@ -42,7 +42,6 @@ class SalesOrderUpi(models.Model):
              "will be used.",
     )
 
-  @api.depends('company_id')
     def _compute_saledisplay_qr_code(self):
         for record in self:
             record.display_qr_code = (
